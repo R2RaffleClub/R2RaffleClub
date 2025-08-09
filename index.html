@@ -1,96 +1,271 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>R2 Raffle Club</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-        }
-        header {
-            background-color: #1a1a1a;
-            padding: 15px 0;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        nav {
-            max-width: 1000px;
-            margin: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        section {
-            padding: 50px 20px;
-            max-width: 1000px;
-            margin: auto;
-        }
-        h1, h2 {
-            color: #333;
-        }
-        footer {
-            background-color: #1a1a1a;
-            color: white;
-            text-align: center;
-            padding: 15px 0;
-            margin-top: 40px;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>R2 Raffle Club — Turn Your R2 into Betway & Hollywoodbets Vouchers</title>
+  <meta name="description" content="R2 Raffle Club — deposit from R2, spin closed mystery boxes and win Betway & Hollywoodbets vouchers. Voucher-only payouts. Play safe, play smart." />
+  <link rel="icon" href="assets/favicon.ico" />
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#0f6bff; /* change this to rebrand */
+      --accent-dark:#0b55d1;
+      --radius:14px;
+      --max-width:1100px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,Arial,sans-serif;
+      background:var(--bg);
+      color:#0f1724;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    header{
+      background:linear-gradient(90deg,var(--accent),var(--accent-dark));
+      color:white;
+      padding:18px 20px;
+      box-shadow:0 6px 20px rgba(15,107,255,0.12);
+      position:sticky;
+      top:0;
+      z-index:50;
+    }
+    .nav{
+      max-width:var(--max-width);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      gap:16px;
+      justify-content:space-between;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{height:40px;width:40px;object-fit:contain;border-radius:8px;background:white;padding:4px}
+    .brand h1{font-size:20px;margin:0;font-weight:700}
+    nav a{color:rgba(255,255,255,0.95);text-decoration:none;margin-left:14px;font-weight:600}
+    .cta-btn{background:#fff;color:var(--accent);padding:8px 14px;border-radius:10px;font-weight:700;text-decoration:none}
+    .menu-toggle{display:none}
+
+    main{max-width:var(--max-width);margin:36px auto;padding:0 18px}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:28px;
+      align-items:center;
+    }
+    .hero-card{
+      background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.95));
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow:0 8px 30px rgba(15,23,36,0.06);
+    }
+    .eyebrow{display:inline-block;background:rgba(15,107,255,0.11);color:var(--accent);padding:6px 10px;border-radius:999px;font-weight:600;margin-bottom:12px}
+    h2{margin:6px 0 12px;font-size:28px}
+    p.lead{color:var(--muted);margin:0 0 18px;line-height:1.6}
+
+    .cta-row{display:flex;gap:12px;align-items:center;margin-top:12px}
+    .btn-primary{background:var(--accent);color:white;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700;box-shadow:0 6px 20px rgba(15,107,255,0.18)}
+    .btn-ghost{background:transparent;border:2px solid #e6eefc;color:var(--accent);padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700}
+
+    .card-side{
+      border-radius:var(--radius);
+      padding:18px;
+      background:linear-gradient(180deg, #fff, #fbfdff);
+      text-align:center;
+      box-shadow:0 6px 20px rgba(15,23,36,0.04);
+    }
+    .card-side h3{margin:10px 0;font-size:18px}
+    .small{color:var(--muted);font-size:14px}
+
+    /* features */
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+    .feature{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(12,18,35,0.03)}
+    .feature h4{margin:0 0 8px}
+    .feature p{margin:0;color:var(--muted);font-size:14px}
+
+    /* responsive */
+    @media (max-width:920px){
+      .hero{grid-template-columns:1fr;gap:18px}
+      .features{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:640px){
+      nav a{display:none}
+      .menu-toggle{display:block;color:white;background:transparent;border:0;font-size:20px}
+      .features{grid-template-columns:1fr}
+      .nav{gap:8px}
+      .brand h1{font-size:16px}
+    }
+
+    /* table styling */
+    table{width:100%;border-collapse:collapse;margin-top:10px}
+    th,td{border:1px solid #eef3ff;padding:10px;text-align:left}
+    th{background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:white}
+
+    footer{max-width:var(--max-width);margin:36px auto;padding:20px;text-align:center;color:var(--muted)}
+  </style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <header>
-        <nav>
-            <div style="color: white; font-size: 1.5em; font-weight: bold;">
-                R2 Raffle Club
-            </div>
-            <div>
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </nav>
-    </header>
+<header>
+  <div class="nav">
+    <div class="brand">
+      <img src="assets/logo.png" alt="R2 Raffle Club logo" onerror="this.style.display='none'">
+      <div>
+        <h1>R2 Raffle Club</h1>
+        <div style="font-size:12px;color:rgba(255,255,255,0.9);margin-top:4px">Turn your R2 into Betway & Hollywoodbets vouchers</div>
+      </div>
+    </div>
 
-    <!-- Home Section -->
-    <section id="home">
-        <h1>Welcome to R2 Raffle Club</h1>
-        <p>Turn R2 into R50 and more! Join our fun raffle game and win Betway or Hollywood vouchers easily.</p>
-    </section>
+    <div style="display:flex;align-items:center;gap:12px">
+      <nav>
+        <a href="#executive">Home</a>
+        <a href="#product-service">Product</a>
+        <a href="#financial-plan">Pricing</a>
+        <a href="#marketing-plan">Marketing</a>
+      </nav>
 
-    <!-- About Section -->
-    <section id="about">
-        <h2>About Us</h2>
-        <p>We help bettors with small budgets grow their funds by providing an affordable and fun way to earn vouchers. 
-           Our goal is to give everyone a fair shot at boosting their betting wallet.</p>
-    </section>
+      <button class="menu-toggle" aria-label="menu" onclick="toggleMenu()">☰</button>
+      <a class="cta-btn" href="#contact">Contact</a>
+    </div>
+  </div>
+</header>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <p>Email: support@r2raffleclub.com</p>
-        <p>WhatsApp: +27 123 456 789</p>
-    </section>
+<main>
+  <section id="executive-summary" class="hero-card hero">
+    <div class="hero-card">
+      <span class="eyebrow">New • Beta</span>
+      <h2>R2 Raffle Club — Spin small, win vouchers for Betway & Hollywoodbets</h2>
+      <p class="lead">Deposit from R2, spin closed mystery boxes and win voucher codes. Vouchers are credited to your in-app wallet — withdraw partial voucher amounts at any time and receive codes by email or SMS.</p>
 
-    <!-- Footer -->
-    <footer>
-        &copy; 2025 R2 Raffle Club. All Rights Reserved.
-    </footer>
+      <div class="cta-row">
+        <a class="btn-primary" href="#product-service">Learn how it works</a>
+        <a class="btn-ghost" href="#marketing-plan">Join waitlist</a>
+      </div>
+
+      <div style="margin-top:18px;font-size:13px;color:var(--muted)">
+        <strong>Note:</strong> This is a planned product. We’ll follow regulatory compliance and partner with voucher providers.
+      </div>
+    </div>
+
+    <aside class="card-side" style="min-width:260px">
+      <h3>Quick stats (example)</h3>
+      <div style="font-size:24px;font-weight:700">R2 min</div>
+      <div class="small" style="margin-top:8px">Low entry barrier to reach more bettors</div>
+      <hr style="margin:14px 0;border-color:#f1f6ff">
+      <h3>Features</h3>
+      <div class="small">Voucher-only payouts · Partial withdrawals · Instant wallet credit</div>
+    </aside>
+  </section>
+
+  <section id="market-analysis" style="margin-top:26px">
+    <h2 id="executive">Step 2 – Market Analysis</h2>
+    <p style="color:var(--muted)">Quick overview of the market and how R2 Raffle Club fits in.</p>
+
+    <div class="features">
+      <div class="feature">
+        <h4>Industry</h4>
+        <p>South African online gambling market is large and mobile-first. Low-entry games are in demand.</p>
+      </div>
+      <div class="feature">
+        <h4>Target Users</h4>
+        <p>Betway & Hollywoodbets players, ages 18–40, mobile-first and low-stake bettors.</p>
+      </div>
+      <div class="feature">
+        <h4>Gap</h4>
+        <p>Most raffles are manual and slow. We offer instant, transparent voucher delivery.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="product-service" style="margin-top:28px">
+    <h2>Step 3 – Product / Service</h2>
+
+    <div style="display:flex;gap:18px;flex-direction:column">
+      <div style="background:var(--card);padding:18px;border-radius:12px">
+        <h3>Core Product</h3>
+        <ul>
+          <li>Mobile-first web app → register & verify (age 18+).</li>
+          <li>Deposit funds (minimum R2) and spin closed boxes.</li>
+          <li>Vouchers credited to wallet; withdraw partial amounts to get voucher codes via email/SMS.</li>
+        </ul>
+      </div>
+
+      <div style="background:var(--card);padding:18px;border-radius:12px">
+        <h3>Prize Mechanics & Admin</h3>
+        <p style="color:var(--muted)">Prizes scale with bet size. Admin panel to upload voucher codes and manage probabilities to ensure the house edge.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="operations-plan" style="margin-top:28px">
+    <h2>Step 4 – Operations Plan</h2>
+    <p style="color:var(--muted)">How the app runs daily and what you’ll monitor.</p>
+    <ul>
+      <li>24/7 automated processing — deposits, spins, voucher delivery.</li>
+      <li>Monitor payment gateway & voucher inventory daily.</li>
+      <li>Customer support (email & in-app chat)</li>
+    </ul>
+  </section>
+
+  <section id="financial-plan" style="margin-top:28px">
+    <h2>Step 5 – Financial Plan</h2>
+    <table>
+      <thead>
+        <tr><th>Item</th><th>Estimate (ZAR)</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Gambling license</td><td>R50,000 – R120,000</td><td>National or provincial</td></tr>
+        <tr><td>App development</td><td>R80,000 – R150,000</td><td>Mobile + backend</td></tr>
+        <tr><td>Web version</td><td>R15,000 – R30,000</td><td>Optional</td></tr>
+        <tr><td>Voucher stock</td><td>R10,000 – R20,000</td><td>Betway & Hollywoodbets codes</td></tr>
+        <tr><td><strong>Total startup</strong></td><td><strong>R178,000 – R363,000</strong></td><td>One-time costs</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="marketing-plan" style="margin-top:28px">
+    <h2>Step 6 – Marketing Plan</h2>
+    <ul>
+      <li>Social ads, influencer collabs, affiliate marketing with betting shops.</li>
+      <li>Promotions: double first deposit, daily jackpots, referral rewards.</li>
+    </ul>
+  </section>
+
+  <section id="contact" style="margin-top:30px">
+    <div style="background:var(--card);padding:18px;border-radius:12px;display:flex;gap:18px;flex-wrap:wrap;align-items:center">
+      <div style="flex:1;min-width:220px">
+        <h3>Want to partner or sponsor?</h3>
+        <p style="color:var(--muted)">Email: <strong>your-email@example.com</strong> or join our waitlist.</p>
+      </div>
+      <div style="min-width:220px">
+        <a href="mailto:your-email@example.com" class="btn-primary">Email Us</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  &copy; <span id="year"></span> R2 Raffle Club • Built by Sibonga Chubeka
+</footer>
+
+<script>
+  // small script: mobile toggle + set year
+  function toggleMenu(){
+    const nav = document.querySelector('nav');
+    nav.style.display = nav.style.display === 'block' ? '' : 'block';
+  }
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 
 </body>
 </html>
